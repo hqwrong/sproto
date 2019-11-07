@@ -246,13 +246,13 @@ namespace foobar
 }
 ```
 
-To refer a namespace in another namespace, use a colon `:`, like
+To refer a namespace in another namespace, use format `name@namespace`, like
 
 ```
 namespace deadbeaf
 
 .beaf {
-   moo 0 : foobar:foo
+   moo 0 : foo@foobar
 }
 
 ```

@@ -30,12 +30,12 @@ namespace telephone
 
 .Phone {
     is_mobile 0 : boolean
-    number 1 : addressbook:Person.PhoneNumber
+    number 1 : Person.PhoneNumber@addressbook
 }
 
 call 1 {
     request {
-        who 0 : addressbook:Person
+        who 0 : Person@addressbook
         what 1 : Phone
     }
     response {
@@ -49,7 +49,7 @@ local sp = sproto.parse(schemas)
 -- core.dumpproto only for debug use
 core.dumpproto(sp.__cobj)
 
-local def = sp:default "addressbook:Person"
+local def = sp:default "Person@addressbook"
 print("default table for Person")
 print_r(def)
 print("--------------")
@@ -87,14 +87,14 @@ local ab = {
 
 collectgarbage "stop"
 
-local code = sp:encode("addressbook:AddressBook", ab)
-local addr = sp:decode("addressbook:AddressBook", code)
+local code = sp:encode("AddressBook@addressbook", ab)
+local addr = sp:decode("AddressBook@addressbook", code)
 print_r(addr)
 
 print("#### test rpc request")
-local req = sp:request_encode("telephone:call", {who = {name="deadbeaf",id=3},what={number={number="1234545"}, is_mobile=true}})
-print_r(sp:request_decode("telephone:call",req))
+local req = sp:request_encode("call@telephone", {who = {name="deadbeaf",id=3},what={number={number="1234545"}, is_mobile=true}})
+print_r(sp:request_decode("call@telephone",req))
 
 print("#### test rpc response")
-local resp =sp:response_encode("telephone:call",{ok=true}) 
-print_r(sp:response_decode("telephone:call",resp))
+local resp =sp:response_encode("call@telephone",{ok=true}) 
+print_r(sp:response_decode("call@telephone",resp))
