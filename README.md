@@ -234,7 +234,8 @@ In lua, enum types are not very useful. You can use integer to define an enum ta
 
 Namespace
 ========
-`Namespace` is optional, but if you declare namespace in one file, you must declear it in the others.
+
+`Namespace` is optional. If you declare namespace in one file, everything defined in it would be suffixed with namespace in format `name@namespace`.
 
 To declare namespace, just put the declaration in the first line, like
 
@@ -246,7 +247,7 @@ namespace foobar
 }
 ```
 
-To refer a namespace in another namespace, use format `name@namespace`, like
+To refer a name in another namespace, use format `name@namespace`, like
 
 ```
 namespace deadbeaf

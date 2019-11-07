@@ -500,15 +500,10 @@ function sparser.parse(text, name)
     if type(text) == "string" then
         parser(text, name or "=text", nil, result)
     else
-        local hasns
         for name,txt in pairs(text) do
             local _,length,namespace = txt:find("^namespace[ \t]+([%w_]+)\n")
             if length then
-                hasns = true
                 txt = txt:sub(length+1) -- rm namespace declaration
-            end
-            if not length and hasns then
-                error("need namespace declaration in file [%s] like others", name)
             end
             parser(txt,name,namespace,result)
         end
